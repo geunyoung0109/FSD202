@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Rolling Gallery</title>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+            width: 100%;/*세로화면기준*/
+            height: 100%;
+        }
+        body{
+            background: url(images/space.jpg) no-repeat center/auto 200%;
+        }    
+        img{
+            border: none;
+            /*이미지링크시 보더 없앰*/
+            vertical-align: middle;
+            /*인라인요소간 오른쪽요소의 세로정렬*/
+        }
+        a{
+            text-decoration: none;
+        }
+        /*갤러리 부모박스*/
+        #wrap{
+            width: 520px;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 20px;
+            /*outline: 2px dotted red;*/
+        }
+        /*메인이미지 박스*/
+        #mbox{
+            display: inline-block;
+            /*block처럼 디자인적용되며
+              inline처럼 한줄에 온다!*/
+        }
+        
+    </style>
+    
+    <script>
+    
+    /*/////////////////////////////////////////////////
+        함수명:chgImg
+        기능: 이동버튼 클릭시 해당순번의 이미지가 연속나옴
+    *//////////////////////////////////////////////////
+        
+    // 이미지번호 변수(전역변수로 있어야 한번 생성해서 게쏙 사용가능!)
+    var num = 1; //처음이미지가 1번이므로    
+        
+    function chgImg(dir){// dir-방향(0-왼쪽,1-오른쪽)
+        //1. 함수호출, 전달값 확인
+        console.log("나야나!"+dir);
+        //2. 방향분기
+        // 오른쪽버튼
+        if(dir){// dir만 쓰면 1일때, 즉, true임!
+            
+            console.log("오른쪽이얌!");
+            //이미지번호 증가
+            num++;//1씩증가
+            //이미지번호 한계값(처음으로 롤링!)
+            if (num === 8)num=1;
+            
+        } ///// if //////////
+        // 왼쪽버튼 //////////////////
+        else{
+            
+            console.log("왼쪽이얌!");
+            //이미지번호 감소
+            num--;//1씩감소
+            //이미지번호 한계값(마지막으로 롤링!)
+            if (num === 0) num = 7;
+            
+        } ///// else /////////
+        // 오른쪽버튼 /////////////////
+        
+        //이미지번호 찍기
+        console.log("이미지번호:"+num);
+        
+        
+        //3. 이미지변경하기
+        // 대상: #mbox img
+        var tg = document.querySelector('#mbox img');
+        // 이미지 src 변경하기
+        tg.setAttribute("src","images/img"+num+".jpg");
+        
+        
+        
+        
+        
+                
+    }////////// chgImg 함수 ////////////////////////////
+    //////////////////////////////////////////////////
+    /*
+        [ 요소를 선택하는 새로운 방법! ]
+        - 기존방식: document.getElementById(아이디명)
+                    document.getElementsByClassName(클래스명).item(순번)
+                    Document.getElementsByTagName(태그명).item(순번)
+        - 기존방식의 불편한점
+            1. 너무 길다
+            2. 하위요소 선택시 불편하다
+        - 새로운방식: CSS선택자를 그대로 사용할 수 있는 방식!
+            1. document.querySelector(CSS선택자)
+            */
+            
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    
+    
+    </script>
+    
+    
+    
+</head>
+<body>
+   <!--갤러리 부모박스-->
+    <div id="wrap">
+        <!--타이틀-->
+        <h1>Rolling Gallery</h1>
+        <!--왼쪽버튼-->
+        <a href="" class="btn lb" onclick="chgImg(0);return false;">
+            <img src="images/left_btn.png" alt="왼쪽이동버튼">
+        </a>
+        <!--메인이미지-->        
+        <div id="mbox">
+            <img src="images/img1.jpg" alt="메인이미지">
+        </div>
+        <!--오른쪽버튼-->            
+        <a href="" class="btn rb" onclick="chgImg(1);return false;">
+            <img src="images/right_btn.png" alt="오른쪽이동버튼">
+        </a>
+    </div>
+    
+     
+       
+</body>
+</html>
